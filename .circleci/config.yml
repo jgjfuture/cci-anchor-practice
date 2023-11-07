@@ -27,7 +27,7 @@ workflows:
       - foo:
           name: foo-everywhere
           requires:
-            - app
+            - app-everywhere
       - foo:
           name: foo-only-master
           filters:
