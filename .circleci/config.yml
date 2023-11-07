@@ -19,10 +19,15 @@ jobs:
 workflows:
   build:
     jobs:
-      - foo:
-          name: foo-everywhere
+      - app:
+          name: app-everywhere
+          type: approval
           filters:
             <<: *stg-filters
+      - foo:
+          name: foo-everywhere
+          requires:
+            - app
       - foo:
           name: foo-only-master
           filters:
