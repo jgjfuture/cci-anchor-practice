@@ -1,0 +1,32 @@
+version: 2.1
+
+references:
+  stg-filters: &stg-filters
+    branches:
+      only:
+        - /.*/
+    tags:
+      ignore:
+        - /.*/
+
+jobs:
+  foo:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "foo"
+
+workflows:
+  build:
+    jobs:
+      - foo:
+          name: foo-everywhere
+          filters:
+            <<: *stg-filters
+      - foo:
+          name: foo-only-master
+          filters:
+            <<: *stg-filters
+            branches:
+              only:
+                - main
